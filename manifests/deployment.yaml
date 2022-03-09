@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: argocd-test
+  name: argocd-test
+  namespace: default
+spec:
+  minReadySeconds: 60
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: argocd-test
+  template:
+    metadata:
+      labels:
+        app: argocd-test
+    spec:
+      containers:
+        - name: argocd-test
+          image: registry.hub.docker.com/ythihia/argocd-test:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8090
+              name: tcp-8090
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: argocd-test
+  name: argocd-test
+  namespace: default
+spec:
+  ports:
+    - name: tcp-8090
+      port: 8090
+      protocol: TCP
+      targetPort: 8090
+  selector:
+    app: argocd-test
+  sessionAffinity: None
+  type: NodePort
