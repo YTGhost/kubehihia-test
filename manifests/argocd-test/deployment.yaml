@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: argocd-test
-          image: registry.hub.docker.com/ythihia/argocd-test:v1
+          image: registry.hub.docker.com/ythihia/argocd-test:v2
           imagePullPolicy: Always
           ports:
             - containerPort: 8090
