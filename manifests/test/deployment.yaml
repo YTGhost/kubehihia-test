@@ -6,7 +6,7 @@ metadata:
   name: test
   namespace: default
 spec:
-  minReadySeconds: 60
+  minReadySeconds: 5
   progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 10
